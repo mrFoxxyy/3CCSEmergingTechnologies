@@ -10,6 +10,7 @@ main_api = "https://api.themoviedb.org/3/search/movie?"
 while True:
     
     #ask the user for a movie title, entering q wil quit the python program
+    print("Search a movie")
     movie = input('Movie title: ')
     if movie =='q':
             exit()
@@ -29,14 +30,14 @@ while True:
     #uncomment the line below to print the constructed URL for testing or troubleshooting purposes 
     #print("URL: " + (url))
 
-    #print the total amount of movies found
-    print("Total movies found: " + str(json_data["total_results"]))
-
     #check if there are movies found else display an error message
     if json_data["total_results"] == 0:
         print("No movies with this title were found!")
 
     else:
+        #print the total amount of movies found
+        print("Total movies found: " + str(json_data["total_results"]))
+
         #constructing output table and adding column names
         table = PrettyTable()
         table.field_names = ["Movie title", "Release Date", "Popularity"]
@@ -45,6 +46,5 @@ while True:
         for movie in json_data["results"]:
             table.add_row([movie["title"], movie["release_date"], round(movie["popularity"])])
     
-
         #print output table
         print(table)
